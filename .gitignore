@@ -1,0 +1,11 @@
+#Hardhat files
+cache
+artifacts
+typechain
+/coverage
+/coverage.json
+deployments/localhost/
+
+dist/
+node_modules
+.env
