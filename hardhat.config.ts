@@ -10,8 +10,7 @@ import "solidity-coverage";
 import { removeConsoleLog } from "hardhat-preprocessor";
 import { HardhatUserConfig } from "hardhat/types";
 
-//// FIXME: Typechain used in tasks. First compile before uncomment the following line.
-// import "./tasks";
+import "./tasks";
 
 const accounts = {
   mnemonic:

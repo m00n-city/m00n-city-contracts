@@ -2,7 +2,6 @@ import { task } from "hardhat/config";
 import { MaxUint256 } from "@ethersproject/constants";
 // import { normalizeHardhatNetworkAccountsConfig } from "hardhat/internal/core/providers/util";
 // import { BN, bufferToHex, privateToAddress, toBuffer } from "ethereumjs-util";
-import { LunarFarm } from "./typechain/LunarFarm";
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -243,7 +242,7 @@ task("lunarfarm:add", "Add pool to LunarFarm")
   )
   .addOptionalParam("account", "Account (team, deployer, etc.)", "team")
   .setAction(async function ({ dtoken, lps, start, end, from, account }, hre) {
-    const lunarFarm = (await hre.ethers.getContract("LunarFarm")) as LunarFarm;
+    const lunarFarm = await hre.ethers.getContract("LunarFarm");
     const aSigner = await hre.ethers.getNamedSigner(account);
     const fromSigner = await hre.ethers.getNamedSigner(from);
 
@@ -272,7 +271,7 @@ task("lunarfarm:deposit", "LunarFarm deposit")
   .addOptionalParam("account", "Account (team, deployer, etc.)", "team")
   .addOptionalParam("to", "Address to deposit")
   .setAction(async function ({ pid, amount, account, to }, hre) {
-    const lunarFarm = (await hre.ethers.getContract("LunarFarm")) as LunarFarm;
+    const lunarFarm = await hre.ethers.getContract("LunarFarm");
     const signer = await hre.ethers.getNamedSigner(account);
     if (!to) {
       to = signer.address;
@@ -295,7 +294,7 @@ task("lunarfarm:withdraw", "LunarFarm withdraw")
   .addOptionalParam("account", "Account (team, deployer, etc.)", "team")
   .addOptionalParam("to", "Address to withdraw")
   .setAction(async function ({ pid, amount, account, to }, hre) {
-    const lunarFarm = (await hre.ethers.getContract("LunarFarm")) as LunarFarm;
+    const lunarFarm = await hre.ethers.getContract("LunarFarm");
     const signer = await hre.ethers.getNamedSigner(account);
     if (!to) {
       to = signer.address;
