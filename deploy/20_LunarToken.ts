@@ -7,9 +7,9 @@ const func: DeployFunction = async function ({
   network,
 }: HardhatRuntimeEnvironment) {
   const { deploy, get, log } = deployments;
-  const { deployer, team, treasury, ido } = await getNamedAccounts();
+  const { deployer, team, ido } = await getNamedAccounts();
 
-  let [governance, minter] = [team, team];
+  let [governance, minter, treasury] = [team, team, team];
 
   if (network.live) {
     const timelock = await get("Timelock");

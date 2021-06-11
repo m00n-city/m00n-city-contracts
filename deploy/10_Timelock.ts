@@ -26,7 +26,7 @@ const func: DeployFunction = async function ({
 
 async function skip({ network, deployments }: HardhatRuntimeEnvironment) {
   if (network.tags.l2) {
-    deployments.log(`L2 network. Not deploying LunarToken.`);
+    deployments.log(`L2 network. Not deploying Timelock.`);
     return true;
   }
   return false;
