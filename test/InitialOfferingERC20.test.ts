@@ -116,11 +116,9 @@ describe("InitialOfferingERC20", function () {
     // 30 days after Initial offering ends
     await increaseTime(time.days(50));
 
-    await initialOffering.connect(teamSigner).withdrawUnclaimedLUNAR();
-
-    const teamLunarBalance = await lunar.balanceOf(teamSigner.address);
-
-    expect(teamLunarBalance).to.be.equal(lunarDistributeAmount);
+    await expect(() =>
+      initialOffering.connect(teamSigner).withdrawUnclaimedLUNAR()
+    ).to.changeTokenBalance(lunar, teamSigner, lunarDistributeAmount);
   });
 
   describe("Successful IBCO", function () {
@@ -338,13 +336,9 @@ describe("InitialOfferingERC20", function () {
       // Initial offering ends
       await increaseTime(time.days(15));
 
-      await initialOffering.connect(teamSigner).withdrawLUNAR();
-
-      const teamLunarBalance = await lunar.balanceOf(teamSigner.address);
-
-      expect(teamLunarBalance).to.be.equal(
-        await initialOffering.totalDistributeAmount()
-      );
+      await expect(() =>
+        initialOffering.connect(teamSigner).withdrawLUNAR()
+      ).to.changeTokenBalance(lunar, teamSigner, lunarDistributeAmount);
     });
   });
 });
