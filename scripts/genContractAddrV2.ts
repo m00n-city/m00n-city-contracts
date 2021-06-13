@@ -4,6 +4,7 @@ const ethers = hre.ethers;
 // ethers.Wallet.createRandom().privateKey;
 const initPrivKey: string = process?.env?.INIT_PKEY ?? "";
 
+const PREFIX = "0xc0ded";
 const POST_LEN = 9;
 const INX = initPrivKey.length - POST_LEN;
 
@@ -21,7 +22,7 @@ for (let i: number = genInt; i <= 16 ** POST_LEN; i++) {
   let newPrivKey = `${prefix}${postfix}`;
   let from = ethers.utils.computeAddress(newPrivKey);
   let contractAddr = ethers.utils.getContractAddress({ from, nonce: 0 });
-  if (contractAddr.toLowerCase().startsWith("0xc0ded")) {
+  if (contractAddr.toLowerCase().startsWith(PREFIX)) {
     console.log(contractAddr);
     console.log(`privKey=${newPrivKey}, nonce=${0}, all=${i - genInt}`);
     process.exit(0);

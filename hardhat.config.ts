@@ -10,13 +10,14 @@ import "solidity-coverage";
 import { removeConsoleLog } from "hardhat-preprocessor";
 import { HardhatUserConfig } from "hardhat/types";
 
+import { getAccountsPKeys } from "./utils/ethers";
 import "./tasks";
 
-const accounts = {
-  mnemonic:
-    process.env.MNEMONIC ||
-    "moon moon moon moon moon moon moon moon moon moon moon walk",
-};
+// const accounts = {
+//   mnemonic: process.env.MNEMONIC,
+// };
+
+const accounts = getAccountsPKeys();
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
