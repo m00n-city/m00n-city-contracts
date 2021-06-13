@@ -1,7 +1,7 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 import { LunarToken } from "../typechain/LunarToken";
-import { time } from "../test/utils";
+import { time } from "../utils";
 import { getLunarTokenAddr } from "../helpers";
 import { config } from "../config";
 import { InitialOfferingERC20 } from "../typechain/InitialOfferingERC20";

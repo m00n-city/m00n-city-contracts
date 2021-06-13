@@ -13,6 +13,12 @@ task("accounts", "Prints the list of accounts", async (args, { ethers }) => {
   }
 });
 
+task(
+  "accounts:pkeys",
+  "Print the list of accounsts private keys",
+  async (args, hre) => {}
+);
+
 // task("accounts", "Prints the list of accounts").setAction(async function (
 //   taskArguments,
 //   hre,

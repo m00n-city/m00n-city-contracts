@@ -1,7 +1,7 @@
 import { ParamType } from "@ethersproject/abi";
 import { BigNumberish, ContractFactory } from "ethers";
 import { ethers } from "hardhat";
-import { ERC20Mock } from "../typechain/ERC20Mock";
+import { ERC20Mock } from "./typechain/ERC20Mock";
 
 export async function increaseTime(seconds: number) {
   await ethers.provider.send("evm_increaseTime", [seconds]);

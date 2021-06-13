@@ -21,7 +21,7 @@ for (let i: number = genInt; i <= 16 ** POST_LEN; i++) {
   let newPrivKey = `${prefix}${postfix}`;
   let from = ethers.utils.computeAddress(newPrivKey);
   let contractAddr = ethers.utils.getContractAddress({ from, nonce: 0 });
-  if (contractAddr.toLowerCase().startsWith("0xabc")) {
+  if (contractAddr.toLowerCase().startsWith("0xc0ded")) {
     console.log(contractAddr);
     console.log(`privKey=${newPrivKey}, nonce=${0}, all=${i - genInt}`);
     process.exit(0);

@@ -1,6 +1,6 @@
 import { ethers, deployments } from "hardhat";
 import { expect } from "chai";
-import { increaseTime, blockTimestamp, time } from "./utils";
+import { increaseTime, blockTimestamp, time } from "../utils";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
 import { Timelock } from "../typechain/Timelock";
 import { LunarToken } from "../typechain/LunarToken";

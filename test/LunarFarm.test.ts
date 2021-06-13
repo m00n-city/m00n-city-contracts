@@ -11,7 +11,7 @@ import {
   mine,
   setAutomine,
   ERC20Factory,
-} from "./utils";
+} from "../utils";
 import { LunarToken } from "../typechain/LunarToken";
 import { LunarFarm } from "../typechain/LunarFarm";
 import { ERC20Mock } from "../typechain/ERC20Mock";

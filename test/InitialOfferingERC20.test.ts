@@ -1,6 +1,6 @@
 import { ethers, deployments, getNamedAccounts } from "hardhat";
 import { expect } from "chai";
-import { increaseTime, time, getErc20Factory, ERC20Factory } from "./utils";
+import { increaseTime, time, getErc20Factory, ERC20Factory } from "../utils";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
 
 import { LunarToken } from "../typechain/LunarToken";
