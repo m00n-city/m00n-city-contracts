@@ -1,5 +1,6 @@
 import { ParamType } from "@ethersproject/abi";
 import { BigNumberish, ContractFactory } from "ethers";
+import { HDNode } from "ethers/lib/utils";
 import { ethers } from "hardhat";
 import { ERC20Mock } from "./typechain/ERC20Mock";
 
@@ -86,3 +87,17 @@ export const getErc20Factory = async function () {
 
   return new ERC20Factory(contractFactory);
 };
+
+export function* hdNodeGen(
+  hdNode: HDNode,
+  start = 0,
+  end = 1000000,
+  path = "m/44'/60'/0'/0/"
+) {
+  let count = 0;
+  for (let i = start; i < end; i++) {
+    count++;
+    yield hdNode.derivePath(`${path}${i}`);
+  }
+  return count;
+}
