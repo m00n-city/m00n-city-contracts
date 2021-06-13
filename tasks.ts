@@ -1,5 +1,6 @@
 import { task } from "hardhat/config";
 import { MaxUint256 } from "@ethersproject/constants";
+import { hdNodeGen } from "./utils/ethers";
 // import { normalizeHardhatNetworkAccountsConfig } from "hardhat/internal/core/providers/util";
 // import { BN, bufferToHex, privateToAddress, toBuffer } from "ethereumjs-util";
 
@@ -14,9 +15,20 @@ task("accounts", "Prints the list of accounts", async (args, { ethers }) => {
 });
 
 task(
-  "accounts:pkeys",
+  "mnemonic:pkeys",
   "Print the list of accounsts private keys",
-  async (args, hre) => {}
+  async (args, hre) => {
+    const MNEMONIC = process.env.MNEMONIC;
+    if (!MNEMONIC) {
+      console.log("MNEMONIC environment is not set");
+      return;
+    }
+
+    const hdNode = hre.ethers.utils.HDNode.fromMnemonic(MNEMONIC);
+    for (const [i, newHdNode] of hdNodeGen(hdNode, 0, 10)) {
+      console.log(`${i}: ${newHdNode.address} ${newHdNode.privateKey}`);
+    }
+  }
 );
 
 // task("accounts", "Prints the list of accounts").setAction(async function (
