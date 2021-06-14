@@ -7,7 +7,7 @@ export async function getLunarTokenAddr(
   const { network, deployments } = hre;
 
   let lunarTokenAddress: string | undefined;
-  if (network.tags.l2) {
+  if (network.tags?.l2) {
     lunarTokenAddress = config.network[network.name]?.lunarToken?.address;
   } else {
     lunarTokenAddress = (await deployments.get("LunarToken")).address;

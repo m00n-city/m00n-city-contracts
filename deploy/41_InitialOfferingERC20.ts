@@ -89,7 +89,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 async function skip({ network, deployments }: HardhatRuntimeEnvironment) {
-  if (!network.tags.l2) {
+  if (!network.tags?.l2) {
     deployments.log(`Not L2 network. Not deploying InitialOfferingERC20.`);
     return true;
   }

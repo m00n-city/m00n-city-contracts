@@ -6,15 +6,20 @@ import { LunarToken } from "../typechain/LunarToken";
 
 let minter: SignerWithAddress,
   governance: SignerWithAddress,
+  deployer: SignerWithAddress,
+  team: SignerWithAddress,
   alice: SignerWithAddress,
   bob: SignerWithAddress,
   carol: SignerWithAddress;
 let lunar: LunarToken;
 let initialSupply: BigNumber;
 
+const { Zero, AddressZero } = ethers.constants;
+
 describe("LunarToken", function () {
   before(async function () {
     [alice, bob, carol] = await ethers.getUnnamedSigners();
+    ({ deployer, team } = await ethers.getNamedSigners());
   });
 
   beforeEach(async function () {
@@ -143,7 +148,7 @@ describe("LunarToken", function () {
     );
   });
 
-  it("should rescue ETH or ERC20 tokens sent to the smart contract by mistake", async function () {
+  it("should rescue ERC20 tokens sent to the smart contract by mistake", async function () {
     await lunar.mint(minter.address, "200");
 
     await lunar.connect(minter).transfer(lunar.address, 200);
@@ -194,5 +199,39 @@ describe("LunarToken", function () {
     await expect(
       lunar.connect(governance).rescueTokens(lunar.address, bob.address, 0)
     ).to.be.revertedWith("LunarToken: trying to send 0 tokens");
+  });
+
+  it("should rescue ETH sent to the smart contract by mistake", async function () {
+    let contractAddr = ethers.utils.getContractAddress({
+      from: deployer.address,
+      nonce: await deployer.getTransactionCount(),
+    });
+
+    // Send 100 ether to contract address
+    const amount = ethers.utils.parseEther("100");
+    await expect(() =>
+      minter.sendTransaction({
+        to: contractAddr,
+        value: amount,
+      })
+    ).to.changeEtherBalance(minter, Zero.sub(amount));
+
+    const lunarFactory = await ethers.getContractFactory("LunarToken");
+    const lunar = await lunarFactory.deploy(
+      team.address,
+      team.address,
+      team.address,
+      team.address
+    );
+
+    expect(contractAddr).to.equals(lunar.address);
+
+    await expect(() =>
+      lunar.connect(team).rescueTokens(AddressZero, bob.address, 0)
+    ).to.changeEtherBalance(bob, amount);
+
+    await expect(
+      lunar.connect(team).rescueTokens(AddressZero, bob.address, 0)
+    ).to.be.revertedWith("LunarToken: trying to send 0 ethers");
   });
 });

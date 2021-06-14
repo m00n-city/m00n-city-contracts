@@ -12,11 +12,6 @@ const func: DeployFunction = async function ({
   // two days in seconds
   const delay = 60 * 60 * 24 * 2;
 
-  if (network.tags.l2) {
-    log(`L2 network. Not deploying Timelock.`);
-    return;
-  }
-
   await deploy("Timelock", {
     from: deployer,
     args: [team, delay],
@@ -25,7 +20,7 @@ const func: DeployFunction = async function ({
 };
 
 async function skip({ network, deployments }: HardhatRuntimeEnvironment) {
-  if (network.tags.l2) {
+  if (network.tags?.l2) {
     deployments.log(`L2 network. Not deploying Timelock.`);
     return true;
   }
