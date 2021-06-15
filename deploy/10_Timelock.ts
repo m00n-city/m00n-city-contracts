@@ -4,9 +4,8 @@ import { DeployFunction } from "hardhat-deploy/types";
 const func: DeployFunction = async function ({
   getNamedAccounts,
   deployments,
-  network,
 }: HardhatRuntimeEnvironment) {
-  const { deploy, log } = deployments;
+  const { deploy } = deployments;
   const { deployer, team } = await getNamedAccounts();
 
   // two days in seconds

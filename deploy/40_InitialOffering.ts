@@ -5,7 +5,7 @@ import { time } from "../utils";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments, ethers, network } = hre;
-  const { deploy, get, log } = deployments;
+  const { deploy, log } = deployments;
   const { deployer, team, ido } = await getNamedAccounts();
   const idoSigner = await ethers.getSigner(ido);
 
