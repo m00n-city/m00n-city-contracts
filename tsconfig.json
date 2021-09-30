@@ -11,6 +11,6 @@
     "sourceMap": true,
     "resolveJsonModule": true
   },
-  "include": ["./scripts", "./deploy", "./test"],
-  "files": ["./hardhat.config.ts", "helpers.ts", "config.ts", "utils.ts"]
+  "include": ["./scripts", "./deploy", "./test", "./utils"],
+  "files": ["./hardhat.config.ts", "helpers.ts", "config.ts"]
 }
