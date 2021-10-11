@@ -13,11 +13,11 @@ import { HardhatUserConfig } from "hardhat/types";
 import { getAccountsPKeys } from "./utils/ethers";
 import "./tasks";
 
-// const accounts = {
-//   mnemonic: process.env.MNEMONIC,
-// };
+const accounts = {
+  mnemonic: process.env.MNEMONIC,
+};
 
-const accounts = getAccountsPKeys();
+// const accounts = getAccountsPKeys();
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -47,10 +47,12 @@ const config: HardhatUserConfig = {
       tags: ["l1"],
     },
     localhost: {
+      accounts,
       live: false,
       tags: ["local"],
     },
     hardhat: {
+      accounts,
       forking: {
         enabled: process.env.HARDHAT_NETWORK_FORKING === "true",
         url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
@@ -58,6 +60,7 @@ const config: HardhatUserConfig = {
       },
       live: false,
       tags: ["local"],
+      chainId: 1337,
     },
     ropsten: {
       url: `https://eth-ropsten.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
