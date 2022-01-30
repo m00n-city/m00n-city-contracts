@@ -9,8 +9,8 @@ const POST_LEN = 9;
 const INX = initPrivKey.length - POST_LEN;
 
 function splitKey(privKey: string): [string, string] {
-  let prefix = privKey.substr(0, INX);
-  let genPart = privKey.substr(INX);
+  let prefix = privKey.substring(0, INX);
+  let genPart = privKey.substring(INX);
   return [prefix, genPart];
 }
 
